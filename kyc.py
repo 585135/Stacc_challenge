@@ -6,7 +6,7 @@ from flask_mongoengine import MongoEngine
 app = Flask(__name__)
 
 database_name = "API"
-DB_URI = "mongodb+srv://Tester:{}@cluster0.blkhw2n.mongodb.net/?retryWrites=true&w=majority".format("THUzZDDmjMdLBHuk")
+DB_URI = "mongodb+srv://Tester:Testing123@cluster0.blkhw2n.mongodb.net/?retryWrites=true&w=majority"
 app.config["MONGODB_HOST"] = DB_URI
 
 db = MongoEngine()
@@ -48,14 +48,19 @@ class pep_small(db.Document):
 
 
 
+''' GET will return the person that is in the pep list'''
 
-@app.route('/api/persons', methods=['GET'])
-def api_persons():
-    if request.method == "GET":
-        persons = []
-        for person in pep_small.objects:
-            persons.append(person)
-        return make_response(jsonify(persons), 200)
+@app.route('/api/name', methods=['GET'])
+def api_name():
+   
+   return make_response(jsonify(pep_small.objects.get(name = "Oleg SLIZHEVSKIY")),201)
+
+   
+
+
+
+
+
 
 
 if __name__ == '__main__':
