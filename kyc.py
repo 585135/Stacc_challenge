@@ -48,7 +48,7 @@ class pep_small(db.Document):
 
 
 
-''' GET will return the person that is in the pep list'''
+''' GET will return the person that is in the pep list, returns all documents in the database'''
 
 @app.route('/api/name', methods=['GET'])
 def api_name():
@@ -56,7 +56,11 @@ def api_name():
    return make_response(jsonify(pep_small.objects.get(name = "Oleg SLIZHEVSKIY")),201)
 
    
+   '''Returns a specific person identified by name from the database.'''
+@app.route('/api/<name>')
+def api_name(name):
 
+    return make_response()
 
 
 
