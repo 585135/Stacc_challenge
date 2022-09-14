@@ -66,11 +66,20 @@ def api_name():
     return make_response(jsonify(persons),200)
 
 '''Returns a specific person identified by name from the database.'''
-@app.route('/api/<name>', methods = ['GET'])
+@app.route('/api/name/<name>', methods = ['GET'])
 def api_person(name):
     found_name = pep_small.objects(name=name).first()
     if found_name:
         return make_response(jsonify(found_name),200)
+    else:
+        return make_response("Not found",404)
+
+'''Return people belonging to certain datasets.'''
+@app.route('/api/dataset/<dataset>', methods = ['GET'])
+def api_dataset(dataset):
+    found_dataset = pep_small.objects(dataset=dataset)
+    if found_dataset:
+        return make_response(jsonify(found_dataset),200)
     else:
         return make_response("Not found",404)
 
