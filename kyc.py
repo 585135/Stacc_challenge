@@ -5,16 +5,20 @@ from flask_mongoengine import MongoEngine
 
 app = Flask(__name__)
 
-database_name = "API"
-DB_URI = "mongodb+srv://Tester:Testing123@cluster0.blkhw2n.mongodb.net/?retryWrites=true&w=majority"
+username = "Test"
+password = "Test123"
+database = "API"
+
+DB_URI = "mongodb+srv://{}:{}@cluster0.bsd7r3w.mongodb.net/{}?retryWrites=true&w=majority".format(username, password, database)
 app.config["MONGODB_HOST"] = DB_URI
 
-db = MongoEngine()
-db.init_app(app)
+db = MongoEngine(app)
+
 
 class pep_small(db.Document):
+    _id = db.ObjectIdField()
     score = db.FloatField()
-    id = db.StringField()
+    pid = db.StringField()
     schema = db.StringField()
     name = db.StringField()
     aliases = db.StringField()
@@ -28,10 +32,13 @@ class pep_small(db.Document):
     last_seen = db.StringField()
     first_seen = db.StringField()
     
+    
+  
     def to_json(self):
         return {
-            "score": self.score,
-           "id": self.id,
+           "_id": self._id,
+           "score": self.score,
+           "pid": self.pid,
            "schema": self.schema,
            "name": self.name,
            "aliases": self.aliases,
@@ -44,23 +51,28 @@ class pep_small(db.Document):
            "dataset": self.dataset,
            "last_seen": self.last_seen,
            "first_seen": self.first_seen
+           
         }
 
 
 
-''' GET will return the person that is in the pep list, returns all documents in the database'''
+'''GET name will return the whole list, returns all documents in the database'''
 
 @app.route('/api/name', methods=['GET'])
 def api_name():
-   
-   return make_response(jsonify(pep_small.objects.get(name = "Oleg SLIZHEVSKIY")),201)
+    persons = []
+    for person in pep_small.objects:
+        persons.append(person)
+    return make_response(jsonify(persons),200)
 
-   
-   '''Returns a specific person identified by name from the database.'''
-@app.route('/api/<name>')
-def api_name(name):
-
-    return make_response()
+'''Returns a specific person identified by name from the database.'''
+@app.route('/api/<name>', methods = ['GET'])
+def api_person(name):
+    found_name = pep_small.objects(name=name).first()
+    if found_name:
+        return make_response(jsonify(found_name),200)
+    else:
+        return make_response("Not found",404)
 
 
 
