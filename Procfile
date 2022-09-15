@@ -1,1 +1,1 @@
-web: gunicorn app:kyc
+web: gunicorn app:app
