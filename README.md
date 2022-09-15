@@ -1,5 +1,6 @@
 Stacc code challenge 2022
-Oppgavebeskrivelse
+
+
 Jeg har valgt å gjøre oppgave b), utvikle mitt eget API.
 
 Prosjektet mitt har gått ut på å lage et API. Jeg har ikke gjort spesielt mye med APIer så tenkte at en god måte å lære det på var å lage ett. Jeg har brukt flask i python og databasen MongoDB Atlas for å oppnå dette. Jeg har også lastet opp appen i Heroku så den kan brukes på mobil etc.
