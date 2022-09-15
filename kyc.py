@@ -1,4 +1,3 @@
-
 from flask import Flask, make_response, request, jsonify
 from flask_mongoengine import MongoEngine
 import os
@@ -67,27 +66,43 @@ def api_name():
         persons.append(person)
     return make_response(jsonify(persons),200)
 
-'''Returns a specific person identified by name from the database.'''
-@app.route('/api/name/<name>', methods = ['GET'])
-def api_person(name):
-    found_name = pep_small.objects(name=name).first()
-    if found_name:
-        return make_response(jsonify(found_name),200)
-    else:
-        return make_response("Not found",404)
 
 '''Return people belonging to certain datasets.'''
 @app.route('/api/dataset/<dataset>', methods = ['GET'])
 def api_dataset(dataset):
-    return make_response(jsonify(pep_small.objects(dataset__icontains=dataset)),200)
+    found = pep_small.objects(dataset__icontains=dataset)
+    if found: 
+        return make_response(jsonify(found),200)
+    else: 
+        return make_response("Not found", 200)
 
 
-'''Unspecific search for name, returns a person if a name contains something in the parameter.'''
-@app.route('/api/name/unspecific/<name>', methods=['GET'])
+'''Unspecific search for name, returns a person if a name contains something in the parameter. If nothing is found using get, you can add a document to the database with the name you searched for.'''
+@app.route('/api/name/<name>', methods=['GET', 'POST'])
 def api_uname(name):
-    
-    return make_response(jsonify(pep_small.objects(name__icontains=name)),200)
-
+    if request.method == "GET":
+        found = pep_small.objects(name__icontains=name)
+        if found:
+            return make_response(jsonify(found),200)
+        else: return make_response("404 Not found", 404)
+    elif request.method == "POST":
+        new_person = pep_small(
+        pid = "",
+        schema = "",
+        name = name,
+        aliases = "",
+        birth_date = "",
+        countries = "",
+        identifiers = "",
+        sanctions = "",
+        phones = "",
+        emails = "",
+        dataset = "",
+        last_seen = "",
+        first_seen = ""
+        )       
+        new_person.save()
+        return make_response("Success", 200)
 
 
 
