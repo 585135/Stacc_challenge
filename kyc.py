@@ -74,7 +74,7 @@ def api_dataset(dataset):
     if found: 
         return make_response(jsonify(found),200)
     else: 
-        return make_response("Not found", 200)
+        return make_response("Not found", 404)
 
 
 '''Unspecific search for name, returns a person if a name contains something in the parameter. If nothing is found using get, you can add a document to the database with the name you searched for.'''
