@@ -58,7 +58,7 @@ class pep_small(db.Document):
 
 '''GET name will return the whole list, returns all documents in the database'''
 
-@app.route('/api/name', methods=['GET'])
+@app.route('/api/all', methods=['GET'])
 def api_name():
     persons = []
     for person in pep_small.objects:
@@ -82,6 +82,13 @@ def api_dataset(dataset):
         return make_response(jsonify(found_dataset),200)
     else:
         return make_response("Not found",404)
+
+
+'''Unspecific search for name, returns a person if a name contains something in the parameter.'''
+@app.route('/api/name/unspecific/<name>', methods=['GET'])
+def api_uname(name):
+    
+    return make_response(jsonify(pep_small.objects(name__icontains=name)),200)
 
 
 
