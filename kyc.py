@@ -80,11 +80,7 @@ def api_person(name):
 '''Return people belonging to certain datasets.'''
 @app.route('/api/dataset/<dataset>', methods = ['GET'])
 def api_dataset(dataset):
-    found_dataset = pep_small.objects(dataset=dataset)
-    if found_dataset:
-        return make_response(jsonify(found_dataset),200)
-    else:
-        return make_response("Not found",404)
+    return make_response(jsonify(pep_small.objects(dataset__icontains=dataset)),200)
 
 
 '''Unspecific search for name, returns a person if a name contains something in the parameter.'''

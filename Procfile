@@ -1,1 +1,1 @@
-web: gunicorn -b :$PORT app:kyc
+web: gunicorn -b :$PORT kyc:app
