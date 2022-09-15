@@ -2,8 +2,11 @@ from msilib import schema
 from unicodedata import name
 from flask import Flask, make_response, request, jsonify
 from flask_mongoengine import MongoEngine
+import os
 
 app = Flask(__name__)
+
+port = int(os.environ.get('PORT', 33507))
 
 username = "Test"
 password = "Test123"
@@ -96,4 +99,4 @@ def api_uname(name):
 
 
 if __name__ == '__main__':
-    app.run(debug=True, port=33507)
+    app.run(host='0.0.0.0', port=port, debug=True)
