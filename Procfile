@@ -1,1 +1,1 @@
-web: gunicorn processWebhook:app --log-file -
+web: gunicorn app:kyc --log-file -
