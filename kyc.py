@@ -84,7 +84,7 @@ def api_uname(name):
         found = pep_small.objects(name__icontains=name)
         if found:
             return make_response(jsonify(found),200)
-        else: return make_response("404 Not found", 404)
+        else: return make_response("Not found", 404)
     elif request.method == "POST":
         new_person = pep_small(
         pid = "",
