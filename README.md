@@ -9,7 +9,6 @@ I dette APIet kan man hente ut alt innholdet i databasen ved å bruke /api/all. 
 Hvis man vil administrere databasen er det også mulighet til å legge til personer på samme route som å søke: /api/name/ < name > ved å sende en POST request isteden for en GET.
 
 
-Hvordan kjøre prosjektet
 Prosjektet er lastet opp på Heroku og kan nås på https://heroku-kyc.herokuapp.com/ bare legg til routes bak så får du ut innholdet.
 Jeg har også opprettet en collection i Postman for kjapp testing av requests. Denne finner man her:https://www.postman.com/navigation-pilot-26434475/workspace/d9c10c8f-5d43-44ea-88dc-6a5fde217198/collection/19260773-c1c7f942-31f3-4de8-9e19-075d357cbaf9?action=share&creator=19260773
 
