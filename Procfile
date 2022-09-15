@@ -1,1 +1,1 @@
-web: gunicorn app:kyc --log-file -
+web: gunicorn app:kyc
