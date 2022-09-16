@@ -10,12 +10,12 @@ username = "Test"
 password = "Test123"
 database = "API"
 
-DB_URI = "mongodb+srv://{}:{}@cluster0.bsd7r3w.mongodb.net/{}?retryWrites=true&w=majority".format(username, password, database)
+DB_URI = f"mongodb+srv://{username}:{password}@cluster0.bsd7r3w.mongodb.net/{database}?retryWrites=true&w=majority"
 app.config["MONGODB_HOST"] = DB_URI
 
 db = MongoEngine(app)
 
-
+# called pep_small to identify which collection in the database to use.
 class pep_small(db.Document):
     _id = db.ObjectIdField()
     score = db.FloatField()
@@ -57,7 +57,7 @@ class pep_small(db.Document):
 
 
 
-'''GET name will return the whole list, returns all documents in the database'''
+# GET /api/all will return all documents in the database
 
 @app.route('/api/all', methods=['GET'])
 def api_name():
@@ -67,7 +67,8 @@ def api_name():
     return make_response(jsonify(persons),200)
 
 
-'''Return people belonging to certain datasets.'''
+#GET /api/dataset/<dataset> returns people belonging to certain provided datasets.
+
 @app.route('/api/dataset/<dataset>', methods = ['GET'])
 def api_dataset(dataset):
     found = pep_small.objects(dataset__icontains=dataset)
@@ -77,7 +78,9 @@ def api_dataset(dataset):
         return make_response("Not found", 404)
 
 
-'''Unspecific search for name, returns a person if a name contains something in the parameter. If nothing is found using get, you can add a document to the database with the name you searched for.'''
+'''/api/name/<name> will search for a provided name, if nothing is found using GET,
+ you can use POST to add a document to the database with the name you searched for.'''
+
 @app.route('/api/name/<name>', methods=['GET', 'POST'])
 def api_uname(name):
     if request.method == "GET":
