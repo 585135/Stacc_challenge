@@ -23,7 +23,7 @@ For å kjøre prosjektet lokalt må man:
 
 *PS.* Om man skulle få certification error [SSL: CERTIFICATE_VERIFY_FAILED] må man oppdatere sitt certificate. Dette har jeg lagt i mappen certificate, filen må lastes ned og endres fra *.pem* til *.cer*
 
-Prosjektet er også lastet opp på Heroku og kan nås på [Heroku API baseURL](https://heroku-kyc.herokuapp.com/). Jeg har opprettet en collection i [Postman](https://www.postman.com/navigation-pilot-26434475/workspace/d9c10c8f-5d43-44ea-88dc-6a5fde217198/collection/19260773-c1c7f942-31f3-4de8-9e19-075d357cbaf9?action=share&creator=19260773) for testing av requests og dokumentasjon på de forskjellige kallene. 
+Prosjektet er også lastet opp på Heroku og kan nås på [Heroku API baseURL](https://heroku-kyc.herokuapp.com/). Man møtes med 404 men kan legge inn /api/all for å skrive ut listen fra databasen. Jeg har opprettet en collection i [Postman](https://www.postman.com/navigation-pilot-26434475/workspace/d9c10c8f-5d43-44ea-88dc-6a5fde217198/collection/19260773-c1c7f942-31f3-4de8-9e19-075d357cbaf9?action=share&creator=19260773) for testing av requests og dokumentasjon på de forskjellige kallene. 
 
 ## Kommentarer 
 Jeg har aldri brukt hverken Python, Flask, MongoDB eller Heroku så mye av tiden gikk på å lære seg ny tech. Jeg hadde originalt planlagt å lage en Java applikasjon som brukte de APIene som var laget fra før men tenkte at jeg kunne prøve noe nytt.
